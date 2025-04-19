@@ -50,64 +50,64 @@ themeToggler.addEventListener("click", () => {
 /*
   Plotly.js graph and chart setup code
 */
-var temperatureHistoryDiv = document.getElementById("temperature-history");
-var humidityHistoryDiv = document.getElementById("humidity-history");
-var pressureHistoryDiv = document.getElementById("pressure-history");
-var altitudeHistoryDiv = document.getElementById("altitude-history");
+var temperaturaHistoryDiv = document.getElementById("temperatura-history");
+var umidadeHistoryDiv = document.getElementById("umidade-history");
+var voltagemHistoryDiv = document.getElementById("voltagem-history");
+var rpmHistoryDiv = document.getElementById("rpm-history");
 
-var temperatureGaugeDiv = document.getElementById("temperature-gauge");
-var humidityGaugeDiv = document.getElementById("humidity-gauge");
-var pressureGaugeDiv = document.getElementById("pressure-gauge");
-var altitudeGaugeDiv = document.getElementById("altitude-gauge");
+var temperaturaGaugeDiv = document.getElementById("temperatura-gauge");
+var umidadeGaugeDiv = document.getElementById("umidade-gauge");
+var voltagemGaugeDiv = document.getElementById("voltagem-gauge");
+var rpmGaugeDiv = document.getElementById("rpm-gauge");
 
 const historyCharts = [
-  temperatureHistoryDiv,
-  humidityHistoryDiv,
-  pressureHistoryDiv,
-  altitudeHistoryDiv,
+  temperaturaHistoryDiv,
+  umidadeHistoryDiv,
+  voltagemHistoryDiv,
+  rpmHistoryDiv,
 ];
 
 const gaugeCharts = [
-  temperatureGaugeDiv,
-  humidityGaugeDiv,
-  pressureGaugeDiv,
-  altitudeGaugeDiv,
+  temperaturaGaugeDiv,
+  umidadeGaugeDiv,
+  voltagemGaugeDiv,
+  rpmGaugeDiv,
 ];
 
 // History Data
-var temperatureTrace = {
+var temperaturaTrace = {
   x: [],
   y: [],
-  name: "Temperature",
+  name: "temperatura",
   mode: "lines+markers",
   type: "line",
 };
-var humidityTrace = {
+var umidadeTrace = {
   x: [],
   y: [],
-  name: "Humidity",
+  name: "umidade",
   mode: "lines+markers",
   type: "line",
 };
-var pressureTrace = {
+var voltagemTrace = {
   x: [],
   y: [],
-  name: "Pressure",
+  name: "voltagem",
   mode: "lines+markers",
   type: "line",
 };
-var altitudeTrace = {
+var rpmTrace = {
   x: [],
   y: [],
-  name: "Altitude",
+  name: "rpm",
   mode: "lines+markers",
   type: "line",
 };
 
-var temperatureLayout = {
+var temperaturaLayout = {
   autosize: true,
   title: {
-    text: "Temperature",
+    text: "temperatura",
   },
   font: {
     size: 12,
@@ -131,10 +131,10 @@ var temperatureLayout = {
     autorange: true,
   },
 };
-var humidityLayout = {
+var umidadeLayout = {
   autosize: true,
   title: {
-    text: "Humidity",
+    text: "umidade",
   },
   font: {
     size: 12,
@@ -155,10 +155,10 @@ var humidityLayout = {
     linecolor: chartAxisColor,
   },
 };
-var pressureLayout = {
+var voltagemLayout = {
   autosize: true,
   title: {
-    text: "Pressure",
+    text: "voltagem",
   },
   font: {
     size: 12,
@@ -179,10 +179,10 @@ var pressureLayout = {
     linecolor: chartAxisColor,
   },
 };
-var altitudeLayout = {
+var rpmLayout = {
   autosize: true,
   title: {
-    text: "Altitude",
+    text: "rpm",
   },
   font: {
     size: 12,
@@ -209,14 +209,14 @@ var config = { responsive: true, displayModeBar: false };
 // Event listener when page is loaded
 window.addEventListener("load", (event) => {
   Plotly.newPlot(
-    temperatureHistoryDiv,
-    [temperatureTrace],
-    temperatureLayout,
+    temperaturaHistoryDiv,
+    [temperaturaTrace],
+    temperaturaLayout,
     config
   );
-  Plotly.newPlot(humidityHistoryDiv, [humidityTrace], humidityLayout, config);
-  Plotly.newPlot(pressureHistoryDiv, [pressureTrace], pressureLayout, config);
-  Plotly.newPlot(altitudeHistoryDiv, [altitudeTrace], altitudeLayout, config);
+  Plotly.newPlot(umidadeHistoryDiv, [umidadeTrace], umidadeLayout, config);
+  Plotly.newPlot(voltagemHistoryDiv, [voltagemTrace], voltagemLayout, config);
+  Plotly.newPlot(rpmHistoryDiv, [rpmTrace], rpmLayout, config);
 
   // Get MQTT Connection
   fetchMQTTConnection();
@@ -226,11 +226,11 @@ window.addEventListener("load", (event) => {
 });
 
 // Gauge Data
-var temperatureData = [
+var temperaturaData = [
   {
     domain: { x: [0, 1], y: [0, 1] },
     value: 0,
-    title: { text: "Temperature" },
+    title: { text: "temperatura" },
     type: "indicator",
     mode: "gauge+number+delta",
     delta: { reference: 30 },
@@ -249,11 +249,11 @@ var temperatureData = [
   },
 ];
 
-var humidityData = [
+var umidadeData = [
   {
     domain: { x: [0, 1], y: [0, 1] },
     value: 0,
-    title: { text: "Humidity" },
+    title: { text: "umidade" },
     type: "indicator",
     mode: "gauge+number+delta",
     delta: { reference: 50 },
@@ -272,11 +272,11 @@ var humidityData = [
   },
 ];
 
-var pressureData = [
+var voltagemData = [
   {
     domain: { x: [0, 1], y: [0, 1] },
     value: 0,
-    title: { text: "Pressure" },
+    title: { text: "voltagem" },
     type: "indicator",
     mode: "gauge+number+delta",
     delta: { reference: 750 },
@@ -295,11 +295,11 @@ var pressureData = [
   },
 ];
 
-var altitudeData = [
+var rpmData = [
   {
     domain: { x: [0, 1], y: [0, 1] },
     value: 0,
-    title: { text: "Altitude" },
+    title: { text: "rpm" },
     type: "indicator",
     mode: "gauge+number+delta",
     delta: { reference: 60 },
@@ -320,24 +320,24 @@ var altitudeData = [
 
 var layout = { width: 300, height: 250, margin: { t: 0, b: 0, l: 0, r: 0 } };
 
-Plotly.newPlot(temperatureGaugeDiv, temperatureData, layout);
-Plotly.newPlot(humidityGaugeDiv, humidityData, layout);
-Plotly.newPlot(pressureGaugeDiv, pressureData, layout);
-Plotly.newPlot(altitudeGaugeDiv, altitudeData, layout);
+Plotly.newPlot(temperaturaGaugeDiv, temperaturaData, layout);
+Plotly.newPlot(umidadeGaugeDiv, umidadeData, layout);
+Plotly.newPlot(voltagemGaugeDiv, voltagemData, layout);
+Plotly.newPlot(rpmGaugeDiv, rpmData, layout);
 
 // Will hold the arrays we receive from our BME280 sensor
-// Temperature
+// temperatura
 let newTempXArray = [];
 let newTempYArray = [];
-// Humidity
-let newHumidityXArray = [];
-let newHumidityYArray = [];
-// Pressure
-let newPressureXArray = [];
-let newPressureYArray = [];
-// Altitude
-let newAltitudeXArray = [];
-let newAltitudeYArray = [];
+// umidade
+let newumidadeXArray = [];
+let newumidadeYArray = [];
+// voltagem
+let newvoltagemXArray = [];
+let newvoltagemYArray = [];
+// rpm
+let newrpmXArray = [];
+let newrpmYArray = [];
 
 // The maximum number of data points displayed on our scatter/line graph
 let MAX_GRAPH_POINTS = 12;
@@ -348,75 +348,75 @@ function updateSensorReadings(jsonResponse) {
   console.log(typeof jsonResponse);
   console.log(jsonResponse);
 
-  let temperature = Number(jsonResponse.temperature).toFixed(2);
-  let humidity = Number(jsonResponse.humidity).toFixed(2);
-  let pressure = Number(jsonResponse.pressure).toFixed(2);
-  let altitude = Number(jsonResponse.altitude).toFixed(2);
+  let temperatura = Number(jsonResponse.temperatura).toFixed(2);
+  let umidade = Number(jsonResponse.umidade).toFixed(2);
+  let voltagem = Number(jsonResponse.voltagem).toFixed(2);
+  let rpm = Number(jsonResponse.rpm).toFixed(2);
 
-  updateBoxes(temperature, humidity, pressure, altitude);
+  updateBoxes(temperatura, umidade, voltagem, rpm);
 
-  updateGauge(temperature, humidity, pressure, altitude);
+  updateGauge(temperatura, umidade, voltagem, rpm);
 
-  // Update Temperature Line Chart
+  // Update temperatura Line Chart
   updateCharts(
-    temperatureHistoryDiv,
+    temperaturaHistoryDiv,
     newTempXArray,
     newTempYArray,
-    temperature
+    temperatura
   );
-  // Update Humidity Line Chart
+  // Update umidade Line Chart
   updateCharts(
-    humidityHistoryDiv,
-    newHumidityXArray,
-    newHumidityYArray,
-    humidity
+    umidadeHistoryDiv,
+    newumidadeXArray,
+    newumidadeYArray,
+    umidade
   );
-  // Update Pressure Line Chart
+  // Update voltagem Line Chart
   updateCharts(
-    pressureHistoryDiv,
-    newPressureXArray,
-    newPressureYArray,
-    pressure
+    voltagemHistoryDiv,
+    newvoltagemXArray,
+    newvoltagemYArray,
+    voltagem
   );
 
-  // Update Altitude Line Chart
+  // Update rpm Line Chart
   updateCharts(
-    altitudeHistoryDiv,
-    newAltitudeXArray,
-    newAltitudeYArray,
-    altitude
+    rpmHistoryDiv,
+    newrpmXArray,
+    newrpmYArray,
+    rpm
   );
 }
 
-function updateBoxes(temperature, humidity, pressure, altitude) {
-  let temperatureDiv = document.getElementById("temperature");
-  let humidityDiv = document.getElementById("humidity");
-  let pressureDiv = document.getElementById("pressure");
-  let altitudeDiv = document.getElementById("altitude");
+function updateBoxes(temperatura, umidade, voltagem, rpm) {
+  let temperaturaDiv = document.getElementById("temperatura");
+  let umidadeDiv = document.getElementById("umidade");
+  let voltagemDiv = document.getElementById("voltagem");
+  let rpmDiv = document.getElementById("rpm");
 
-  temperatureDiv.innerHTML = temperature + " C";
-  humidityDiv.innerHTML = humidity + " %";
-  pressureDiv.innerHTML = pressure + " hPa";
-  altitudeDiv.innerHTML = altitude + " m";
+  temperaturaDiv.innerHTML = temperatura + " C";
+  umidadeDiv.innerHTML = umidade + " %";
+  voltagemDiv.innerHTML = voltagem + " hPa";
+  rpmDiv.innerHTML = rpm + " m";
 }
 
-function updateGauge(temperature, humidity, pressure, altitude) {
-  var temperature_update = {
-    value: temperature,
+function updateGauge(temperatura, umidade, voltagem, rpm) {
+  var temperatura_update = {
+    value: temperatura,
   };
-  var humidity_update = {
-    value: humidity,
+  var umidade_update = {
+    value: umidade,
   };
-  var pressure_update = {
-    value: pressure,
+  var voltagem_update = {
+    value: voltagem,
   };
-  var altitude_update = {
-    value: altitude,
+  var rpm_update = {
+    value: rpm,
   };
-  Plotly.update(temperatureGaugeDiv, temperature_update);
-  Plotly.update(humidityGaugeDiv, humidity_update);
-  Plotly.update(pressureGaugeDiv, pressure_update);
-  Plotly.update(altitudeGaugeDiv, altitude_update);
+  Plotly.update(temperaturaGaugeDiv, temperatura_update);
+  Plotly.update(umidadeGaugeDiv, umidade_update);
+  Plotly.update(voltagemGaugeDiv, voltagem_update);
+  Plotly.update(rpmGaugeDiv, rpm_update);
 }
 
 function updateCharts(lineChartDiv, xArray, yArray, sensorRead) {
